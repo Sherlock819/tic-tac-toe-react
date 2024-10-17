@@ -1,0 +1,151 @@
+.tic-tac-toe-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: 320px;
+  margin: 20px auto;
+  padding: 10px;
+  border: 5px solid rgba(0, 0, 0, 0.6); /* Darker outer border for contrast */
+  background-color: rgba(255, 255, 255, 0.9); /* Light background for the board */
+  border-radius: 15px; /* Rounded corners for the board */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow for depth */
+  position: relative; /* Ensure the board has relative positioning */
+  z-index: 2; /* Set a higher z-index for the board */
+  margin-top: 20px; /* Optional margin for additional spacing */
+  animation: boardAnimation 1s ease-in-out; /* Animation on load */
+}
+
+/* Animation for the board */
+@keyframes boardAnimation {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Tic Tac Toe Button */
+.tic-tac-toe-btn {
+  width: 100px;
+  height: 100px;
+  font-size: 2rem; /* Large font size for 'X' and 'O' */
+  background-color: rgba(185, 179, 179, 0.9); /* Dark button background for contrast */
+  border: 2px solid rgba(177, 166, 166, 0.6); /* Subtle border for the buttons */
+  color: #ffeb3b; /* Bright yellow text for visibility */
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+/* Hover effect */
+.tic-tac-toe-btn:hover {
+  background-color: rgba(60, 60, 60, 0.9); /* Lighter gray on hover */
+  transform: translateY(-3px); /* Lift effect on hover */
+  transform: scale(1.05); /* Slightly enlarge the button */
+}
+
+/* Active/selected button state */
+.tic-tac-toe-btn:active,
+.tic-tac-toe-btn.selected {
+  background-color: rgba(146, 146, 146, 0.8); /* Darker on active */
+  font-weight: bold;
+  color: #ffeb3b; /* Bright yellow text for selected state */
+  cursor: default; /* No pointer cursor once clicked */
+}
+
+/* Disable pointer events after a button is clicked (optional) */
+.tic-tac-toe-btn:disabled {
+  background-color: rgba(224, 224, 224, 0.8);
+  cursor: not-allowed;
+}
+
+/* Winning tile */
+.winning-tile {
+  background-color: rgba(107, 178, 174, 0.9) !important; /* Highlight color for winning tiles */
+  border: 2px solid rgba(0, 143, 157, 0.9); /* Border for winning tiles */
+  animation: winAnimation 0.5s ease forwards;
+}
+
+@keyframes winAnimation {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(107, 178, 174, 0);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(107, 178, 174, 0.5);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 20px rgba(107, 178, 174, 0.8);
+  }
+}
+
+/* Reset button */
+.reset-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #ff5722; /* Bright coral for contrast */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.reset-btn:hover {
+  background-color: #ff784e; /* Lighter coral on hover */
+}
+
+/* Game container */
+.game-container {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  position: relative; /* Ensure relative positioning */
+  padding-top: 50px; /* Reduced padding */
+}
+
+/* Game message */
+.game-message {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.game-message.show {
+  opacity: 1;
+}
+
+/* X button color */
+.tic-tac-toe-btn.X {
+  background-color: rgba(239, 83, 80, 0.9); /* Softer coral */
+  color: white; /* Text color for X */
+}
+
+/* O button color */
+.tic-tac-toe-btn.O {
+  background-color: rgba(3, 169, 244, 0.9); /* Softer teal */
+  color: white; /* Text color for O */
+}
+
+/* Bubbles animation */
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3); /* Softer bubble color */
+  animation: floatBubbles 4s ease-in-out infinite;
+}
+
+@keyframes floatBubbles {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0); }
+}

@@ -1,0 +1,228 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* Ensure the body covers full height */
+  background: linear-gradient(270deg, rgba(38, 50, 56, 0.9), rgba(100, 212, 212, 0.8)); /* Softer gradient background */
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.App {
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.8); /* Reduced opacity for a softer background */
+  min-height: 100vh; /* Ensure it covers at least the full viewport height */
+  position: relative; /* Allows floating circles to be positioned relative to this container */
+  overflow: hidden; /* Hide any overflow from floating circles */
+}
+
+.App-header {
+  background-color: rgba(29, 29, 29, 0.9); /* Semi-transparent dark header */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #ffeb3b; /* Bright yellow link color */
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: rgba(30, 30, 30, 0.9); /* Darker shade for the navbar */
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+.topnav a {
+  float: left;
+  color: #ffffff; /* Light text for navbar */
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  transition: color 0.3s ease, transform 0.3s ease; /* Smooth color and transform transitions */
+}
+
+.topnav a:hover {
+  background-color: rgba(100, 100, 100, 0.7); /* Lighter gray on hover */
+  color: #ffeb3b; /* Bright yellow text on hover */
+  transform: scale(1.1); /* Slightly enlarge the link */
+}
+
+.topnav a.active {
+  background-color: rgba(0, 150, 136, 0.9); /* Teal for active state */
+  color: #ffffff; /* White text for active state */
+  box-shadow: 0 0 10px rgba(0, 150, 136, 0.5); /* Shadow effect for active link */
+}
+
+.error {
+  color: #d32f2f; /* Dark red for error messages */
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0); }
+}
+
+.floating-circle {
+  position: absolute;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Stronger shadow for depth */
+  animation: float 3s ease-in-out infinite;
+}
+
+.circle-1 {
+  width: 50px;
+  height: 50px;
+  top: 5%; /* Higher position */
+  left: 20%;
+  background-color: rgba(255, 152, 0, 0.9); /* Bright orange */
+  animation-duration: 4s;
+}
+
+.circle-2 {
+  width: 30px;
+  height: 30px;
+  top: 25%; /* Mid-level position */
+  left: 50%;
+  background-color: rgba(76, 175, 80, 0.9); /* Bright green */
+  animation-duration: 5s;
+}
+
+.circle-3 {
+  width: 40px;
+  height: 40px;
+  top: 50%; /* Center position */
+  left: 70%;
+  background-color: rgba(33, 150, 243, 0.9); /* Bright blue */
+  animation-duration: 6s;
+}
+
+.circle-4 {
+  width: 20px;
+  height: 20px;
+  top: 70%; /* Lower position */
+  left: 30%;
+  background-color: rgba(156, 39, 176, 0.9); /* Bright purple */
+  animation-duration: 7s;
+}
+
+.circle-5 {
+  width: 25px;
+  height: 25px;
+  top: 80%; /* Near the bottom */
+  left: 10%;
+  background-color: rgba(255, 235, 59, 0.9); /* Bright yellow */
+  animation-duration: 8s;
+}
+
+/* Player message (current player or winner) */
+.player-message {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+  position: relative;
+}
+
+/* Text slide-in effect for current player message */
+.text-slide {
+  animation: slideIn 1s ease-in-out;
+}
+
+/* Zoom effect for winner message */
+.text-zoom {
+  animation: zoomIn 0.8s ease-in-out;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Game message (next move or winner) with fade-in effect */
+.game-message {
+  opacity: 0;
+  font-size: 1.5rem;
+  margin-top: 10px;
+  color: #555;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.game-message.show {
+  opacity: 1;
+}
+
+/* Fade-in animation for game messages */
+.fade-in {
+  animation: fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Reset button with bounce effect */
+.reset-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #8e24aa;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.reset-btn:hover {
+  background-color: #9c27b0;
+}
+
+/* Bounce effect for reset button */
+.bounce {
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
