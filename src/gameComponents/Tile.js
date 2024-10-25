@@ -1,11 +1,19 @@
+import React from 'react';
 import "../css/tic-tac-toe.css"
 
-export const Tile = (props) => {
+export const Tile = ({ id, value, setTile, isWinningTile, winner, isClickable }) => {
+    const handleClick = () => {
+        if (!value && !winner && isClickable) {
+            setTile();
+        }
+    };
 
-    const tileClass = props.value ? `tic-tac-toe-btn ${props.value}` : 'tic-tac-toe-btn';
     return (
-        <div>
-            <button className={`${tileClass}  ${props.isWinningTile ? 'winning-tile' : ''}`} onClick={() => props.setTile(props.id)} disabled={ props.isMyTurn === false || (props.winner != null || props.value != null) }>{props.value}</button>
+        <div 
+            className={`game-tile ${value || ''} ${isWinningTile ? 'winning' : ''} ${!value && isClickable && !winner ? 'clickable' : ''}`}
+            onClick={handleClick}
+        >
+            {value}
         </div>
-    )
-}
+    );
+};

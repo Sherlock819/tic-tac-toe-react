@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Board } from '../gameComponents/Board';
 import '../css/GamePage.css';
 import { WebSocketContext } from '../contexts/WebSocketContext';
@@ -8,10 +8,23 @@ const GamePage = () => {
     const { gameId, isMyTurn, isReady, playerSymbol } = useContext(WebSocketContext);
     const [copyButtonText, setCopyButtonText] = useState('Copy');
     const { winner, currentPlayer } = useMultiplayerPlayerGameLogic();
-    
+    const [gameStatus, setGameStatus] = useState('waiting');
+
+    useEffect(() => {
+        if (!isReady) {
+            setGameStatus('waiting');
+        } else if (winner) {
+            setGameStatus('finished');
+        } else {
+            setGameStatus('playing');
+        }
+    }, [isReady, winner]);
+
     const getTurnMessage = () => {
         if (!isReady) {
             return "Waiting for another player to join...";
+        } else if (winner) {
+            return winner === 'Tie' ? "It's a tie!" : `Player ${winner} wins!`;
         } else if (isMyTurn) {
             return (
                 <>
@@ -31,7 +44,7 @@ const GamePage = () => {
 
     return (
         <div className="game-page">
-            <div className="game-content">
+            <div className={`game-content ${gameStatus}`}>
                 <div className="game-info">
                     <div className="game-id-container">
                         <span className="game-id">Game ID: {gameId}</span>
@@ -39,13 +52,11 @@ const GamePage = () => {
                             {copyButtonText}
                         </button>
                     </div>
-                    {!winner && (
-                        <div className="turn-message-container">
-                            <div className={`turn-message ${isMyTurn ? 'your-turn' : ''}`}>
-                                {getTurnMessage()}
-                            </div>
+                    <div className="turn-message-container">
+                        <div className={`turn-message ${isMyTurn ? 'your-turn' : ''}`}>
+                            {getTurnMessage()}
                         </div>
-                    )}
+                    </div>
                 </div>
                 <div className="board-wrapper">
                     <Board id="multiplayer" isReady={isReady} />

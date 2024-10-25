@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 1000; /* Ensure navbar stays on top */
   background-color: rgba(173, 181, 189, 0.9);
   overflow: hidden;
   padding: 10px;
