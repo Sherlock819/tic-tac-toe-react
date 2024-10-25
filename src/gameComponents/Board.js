@@ -1,12 +1,16 @@
 import { Tile } from "./Tile"
 import { useSinglePlayerGameLogic } from "../hooks/useSinglePlayerGameLogic";
 import { useMultiplayerPlayerGameLogic } from "../hooks/useMultiplayerPlayerGameLogic";
+import { useContext } from "react";
+import { WebSocketContext } from "../contexts/WebSocketContext";
 
 export const Board = (props) => {
 
     // Call both hooks unconditionally
     const singlePlayerLogic = useSinglePlayerGameLogic();
     const multiplayerLogic = useMultiplayerPlayerGameLogic();
+
+    const { isReady, isMyTurn } = useContext(WebSocketContext);
 
     // Use the appropriate logic based on props.id
     const {
@@ -18,9 +22,9 @@ export const Board = (props) => {
         resetGame,
     } = props.id === "singleplayer" ? singlePlayerLogic : multiplayerLogic;
 
-    // const {winner, currentPlayer, board, winningCombination, setTile, resetGame} = props.id === "singleplayer" ? useSinglePlayerGameLogic() : useMultiplayerPlayerGameLogic()
 
     let endGameMessage = "It's a Tie";
+    const connecting = "Waiting for opponent to join...";
 
     if(winner && winner !== "Tie")
     {
@@ -29,20 +33,23 @@ export const Board = (props) => {
 
     return (
       <div className="game-container">
-        {/* Animated current player or winner message */}
-        <h2 className={`player-message ${winner ? 'text-zoom' : 'text-slide'}`}>
-          {winner ? endGameMessage : `Current Player: ${currentPlayer}`}
-        </h2>
-  
         {/* Game message with a fade-in effect */}
         <div className={`game-message ${winner || (board.includes(null) === false && !winner) ? 'show fade-in' : ''}`}>
-          {winner ? endGameMessage : 'Next Move!'}
+          {winner ? endGameMessage : ''}
         </div>
   
         {/* Tic Tac Toe Board */}
         <div className="tic-tac-toe-board">
           {board.map((value, index) => (
-            <Tile key={index} id={index} value={value} setTile={setTile} isWinningTile={winningCombination.includes(index)} winner={winner} />
+            <Tile 
+              key={index} 
+              id={index} 
+              value={value} 
+              setTile={setTile} 
+              isWinningTile={winningCombination.includes(index)} 
+              winner={winner} 
+              isMyTurn={props.id === "singleplayer" ? true : props.isReady && isMyTurn} 
+            />
           ))}
         </div>
   

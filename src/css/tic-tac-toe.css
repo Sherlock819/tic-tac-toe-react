@@ -111,7 +111,7 @@
   text-align: center;
   font-family: Arial, sans-serif;
   position: relative; /* Ensure relative positioning */
-  padding-top: 50px; /* Reduced padding */
+  padding-top: 0px; /* Reduced padding */
 }
 
 /* Game message */

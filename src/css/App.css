@@ -19,6 +19,7 @@ body {
   min-height: 100vh; /* Ensure it covers at least the full viewport height */
   position: relative; /* Allows floating circles to be positioned relative to this container */
   overflow: hidden; /* Hide any overflow from floating circles */
+  transition: background-color 0.5s ease;
 }
 
 .App-header {
@@ -30,10 +31,16 @@ body {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  transition: all 0.5s ease;
 }
 
 .App-link {
   color: #ffeb3b; /* Bright yellow link color */
+  transition: color 0.3s ease;
+}
+
+.App-link:hover {
+  color: #ffd700;
 }
 
 .topnav {
@@ -226,3 +233,44 @@ body {
   }
 }
 
+/* Add these new styles for improved interactivity */
+
+.content-container {
+  padding: 20px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.input-field {
+  padding: 10px;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.input-field:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+}

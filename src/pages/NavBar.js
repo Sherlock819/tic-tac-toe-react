@@ -1,11 +1,16 @@
-import {  NavLink  } from "react-router-dom"
+import { NavLink, useLocation } from "react-router-dom";
+import '../css/NavBar.css';  // Updated to include NavBar CSS
 
 export const NavBar = () => {
-    return (
-        <div className="topnav">
-            <NavLink to="/" className={({ isActive }) => isActive ? "active" : undefined}> Home</NavLink>
-            <NavLink to="/SinglePlayer" className={({ isActive }) => isActive ? "active" : undefined}> SinglePlayer</NavLink>
-            <NavLink to="/Multiplayer" className={({ isActive }) => isActive ? "active" : undefined}> Multiplayer</NavLink>
-        </div>
-    )
-}
+  const location = useLocation();
+
+  return (
+    <div className="topnav">
+      <NavLink to="/" className={({ isActive }) => isActive ? "active" : undefined} end>Home</NavLink>
+      <NavLink to="/SinglePlayer" className={({ isActive }) => isActive ? "active" : undefined}>SinglePlayer</NavLink>
+      <NavLink to="/Multiplayer" className={({ isActive }) => 
+        isActive || location.pathname.startsWith('/game/') ? "active" : undefined
+      }>Multiplayer</NavLink>
+    </div>
+  );
+};

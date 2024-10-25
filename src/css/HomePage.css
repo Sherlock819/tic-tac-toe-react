@@ -1,56 +1,96 @@
-/* src/components/HomePage.css */
+/* HomePage.css */
 .homepage-container {
-    min-height: 100vh;
-    background: linear-gradient(270deg, rgba(0, 150, 136, 0.8), rgba(100, 212, 212, 0.8));
-    background-size: 400% 400%;
-    animation: backgroundAnimation 20s ease infinite;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: #fff;
+  background: linear-gradient(135deg, #f0f0f0, #d8dee9);
+  color: #333;
+  text-align: center;
+  min-height: 100vh;
+  position: relative;
+}
+
+.homepage-header {
+  padding: 50px 20px;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #5e81ac;
+}
+
+.intro-text {
+  font-size: 1.2rem;
+  margin-top: 20px;
+  color: #4c566a;
+}
+
+.button-container {
+  margin-top: 40px;
+}
+
+.explore-button {
+  padding: 10px 30px;
+  background-color: #81a1c1;
+  color: white;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+}
+
+.explore-button:hover {
+  background-color: #5e81ac;
+}
+
+/* Floating Tic Tac Toe elements */
+.floating-xo {
+  position: absolute;
+  font-size: 5rem;
+  opacity: 0.3;
+  animation: float 5s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
   }
-  
-  @keyframes backgroundAnimation {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+  50% {
+    transform: translateY(-20px);
   }
-  
-  .title {
-    font-size: 4rem;
-    font-weight: bold;
-    margin: 0;
-    animation: titleAnimation 2s ease-in-out;
+  100% {
+    transform: translateY(0px);
   }
-  
-  @keyframes titleAnimation {
-    0% { opacity: 0; transform: scale(0.5); }
-    100% { opacity: 1; transform: scale(1); }
-  }
-  
-  .intro-text {
-    font-size: 1.5rem;
-    margin: 20px 0;
-  }
-  
-  .button-container {
-    margin-top: 20px;
-  }
-  
-  .explore-button {
-    padding: 10px 20px;
-    background-color: #ffeb3b;
-    color: #333;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 1.2rem;
-    transition: background-color 0.3s, transform 0.3s;
-  }
-  
-  .explore-button:hover {
-    background-color: #fbc02d;
-    transform: scale(1.05);
-  }
-  
+}
+
+.x {
+  color: #bf616a;
+}
+
+.o {
+  color: #a3be8c;
+}
+
+/* Positions for floating Xs and Os */
+.xo-1 {
+  top: 10%;
+  left: 15%;
+}
+
+.xo-2 {
+  top: 30%;
+  right: 10%;
+}
+
+.xo-3 {
+  bottom: 20%;
+  left: 30%;
+}
+
+.xo-4 {
+  bottom: 15%;
+  right: 20%;
+}
+
+.xo-5 {
+  top: 50%;
+  left: 45%;
+}

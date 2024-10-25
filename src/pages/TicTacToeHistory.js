@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/TicTacToeHistory.css';
+import '../css/TicTacToeHistory.css';  // Updated to include TicTacToeHistory CSS
 
 const TicTacToeHistory = () => {
   return (

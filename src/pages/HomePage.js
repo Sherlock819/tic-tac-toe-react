@@ -1,7 +1,6 @@
-// src/components/HomePage.js
 import React from 'react';
 import TicTacToeHistory from './TicTacToeHistory';
-import '../css/HomePage.css';
+import '../css/HomePage.css';  // Updated to include HomePage.css
 
 const HomePage = () => {
   return (
