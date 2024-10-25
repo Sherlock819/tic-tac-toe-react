@@ -28,11 +28,11 @@ const GamePage = () => {
         } else if (isMyTurn) {
             return (
                 <>
-                    Your Turn - <span className={`player-symbol ${currentPlayer}`}>{currentPlayer}</span>
+                    Your Turn - You are <span className={`player-symbol ${currentPlayer}`}>{currentPlayer}</span>
                 </>
             );
         } else {
-            return "Waiting for opponent to make a move";
+            return "Opponent's turn - Please wait";
         }
     };
 
@@ -46,12 +46,14 @@ const GamePage = () => {
         <div className="game-page">
             <div className={`game-content ${gameStatus}`}>
                 <div className="game-info">
-                    <div className="game-id-container">
-                        <span className="game-id">Game ID: {gameId}</span>
-                        <button onClick={handleCopy} className={`copy-button ${copyButtonText === 'Copied!' ? 'copied' : ''}`}>
-                            {copyButtonText}
-                        </button>
-                    </div>
+                    {gameId && (
+                        <div className="game-id-container">
+                            <span className="game-id">Game ID: {gameId}</span>
+                            <button onClick={handleCopy} className={`copy-button ${copyButtonText === 'Copied!' ? 'copied' : ''}`}>
+                                {copyButtonText}
+                            </button>
+                        </div>
+                    )}
                     <div className="turn-message-container">
                         <div className={`turn-message ${isMyTurn ? 'your-turn' : ''}`}>
                             {getTurnMessage()}

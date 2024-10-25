@@ -1,44 +1,123 @@
 /* HomePage.css */
 .homepage-container {
-  background: linear-gradient(135deg, #f0f0f0, #d8dee9);
-  color: #333;
-  text-align: center;
-  min-height: 100vh;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 20px 20px; /* Increased top padding for the floating navbar */
+  min-height: calc(100vh - 100px); /* Adjusted for top padding */
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .homepage-header {
-  padding: 50px 20px;
+  text-align: center;
+  margin-bottom: 40px;
 }
 
 .title {
-  font-size: 3rem;
-  font-weight: bold;
-  color: #5e81ac;
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  animation: fadeInDown 1s ease-out;
 }
 
 .intro-text {
   font-size: 1.2rem;
-  margin-top: 20px;
-  color: #4c566a;
+  color: #34495e;
+  max-width: 600px;
+  margin: 0 auto;
+  animation: fadeIn 1s ease-out 0.5s both;
+}
+
+.section-title {
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  text-align: center;
+  animation: fadeIn 1s ease-out;
+}
+
+.game-modes {
+  width: 100%;
+  margin-bottom: 40px;
 }
 
 .button-container {
-  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
 }
 
-.explore-button {
-  padding: 10px 30px;
-  background-color: #81a1c1;
-  color: white;
-  border-radius: 20px;
+.game-mode-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  width: 250px;
+  background-color: #ffffff;
+  border-radius: 10px;
   text-decoration: none;
-  font-size: 1.1rem;
-  transition: background-color 0.3s ease;
+  color: #2c3e50;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1s ease-out 1s both;
 }
 
-.explore-button:hover {
-  background-color: #5e81ac;
+.game-mode-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.icon {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.mode-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.mode-description {
+  font-size: 0.9rem;
+  text-align: center;
+  color: #7f8c8d;
+}
+
+.history-section {
+  width: 100%;
+  animation: fadeIn 1s ease-out 1.5s both;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .homepage-container {
+    padding: 40px 10px 10px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .intro-text {
+    font-size: 1rem;
+  }
+
+  .game-mode-button {
+    width: 100%;
+    max-width: 300px;
+  }
 }
 
 /* Floating Tic Tac Toe elements */

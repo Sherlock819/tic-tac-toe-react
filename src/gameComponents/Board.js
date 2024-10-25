@@ -25,18 +25,20 @@ export const Board = (props) => {
                     {winner === 'Tie' ? "It's a tie!" : `Player ${winner} wins!`}
                 </div>
             )}
-            <div className="game-board">
-                {board.map((value, index) => (
-                    <Tile 
-                        key={index} 
-                        id={index} 
-                        value={value} 
-                        setTile={() => handleTileClick(index)} 
-                        isWinningTile={winningCombination.includes(index)} 
-                        winner={winner} 
-                        isClickable={props.id === "singleplayer" || (isReady && isMyTurn)}
-                    />
-                ))}
+            <div className="board-container">
+                <div className="game-board">
+                    {board.map((value, index) => (
+                        <Tile 
+                            key={index} 
+                            id={index} 
+                            value={value} 
+                            setTile={() => handleTileClick(index)} 
+                            isWinningTile={winningCombination.includes(index)} 
+                            winner={winner} 
+                            isClickable={props.id === "singleplayer" || (isReady && isMyTurn)}
+                        />
+                    ))}
+                </div>
             </div>
             {winner && (
                 <button className="reset-btn bounce" onClick={resetGame}>

@@ -5,8 +5,9 @@ export const SinglePlayer = () => {
   return (
     <div className="single-player-page">
       <div className="instructions animated-text">
-        <p>Play against the AI. You are X, and the AI is O.</p>
-        <p className="highlight">Good luck!</p>
+        <p>Challenge the AI in this classic game of strategy.</p>
+        <p>You are <span className="player-x">X</span>, and the AI is <span className="player-o">O</span>.</p>
+        <p className="highlight">Make your move by clicking on an empty square. Good luck!</p>
       </div>
       <div className="board-wrapper">
         <Board id="singleplayer" />

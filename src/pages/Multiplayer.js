@@ -8,14 +8,15 @@ export const Multiplayer = () => {
 
     return (
         <div className="multiplayer-container">
-            <h2 className="animated-text">Multiplayer Tic Tac Toe</h2>
+            <h2 className="animated-text">Multiplayer Tic-Tac-Toe</h2>
             <div className="game-options">
-                <button className="game-button create animated-button" onClick={createGame}>Create Game</button>
+                <button className="game-button create animated-button" onClick={createGame}>Create New Game</button>
             </div>
             <div className="join-game-container">
+                <p>Or join an existing game:</p>
                 <input 
                     type="text" 
-                    placeholder="Enter Game ID" 
+                    placeholder="Enter your friend's Game ID" 
                     value={gameId} 
                     onChange={(e) => setGameId(e.target.value)}
                     className="game-id-input animated-input"

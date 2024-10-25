@@ -2,24 +2,14 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh; /* Ensure the body covers full height */
-  background: linear-gradient(270deg, rgba(38, 50, 56, 0.9), rgba(100, 212, 212, 0.8)); /* Softer gradient background */
-  background-size: 400% 400%;
-  animation: gradientAnimation 15s ease infinite;
-}
-
-@keyframes gradientAnimation {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  background-color: #e0f7fa; /* Static light blue background */
 }
 
 .App {
   text-align: center;
-  background-color: rgba(255, 255, 255, 0.8); /* Reduced opacity for a softer background */
-  min-height: 100vh; /* Ensure it covers at least the full viewport height */
-  position: relative; /* Allows floating circles to be positioned relative to this container */
-  overflow: hidden; /* Hide any overflow from floating circles */
-  transition: background-color 0.5s ease;
+  min-height: 100vh;
+  position: relative;
+  /* Remove any background-related properties or transitions here */
 }
 
 .App-header {
@@ -274,3 +264,5 @@ body {
   border-color: #4CAF50;
   box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
 }
+
+/* Remove any background-related animations or transitions */
