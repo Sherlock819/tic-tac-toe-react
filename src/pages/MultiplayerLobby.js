@@ -1,14 +1,12 @@
 import React from "react";
 import '../css/Multiplayer.css';
-import { useWebSocketContext, WebSocketProvider } from "../contexts/WebSocketContext";
+import { useWebSocketContext } from "../contexts/WebSocketContext";
 import { Multiplayer } from "./Multiplayer";
 import GamePage from "./GamePage";
 
 export const MultiplayerLobby = () => {
     return (
-        <WebSocketProvider>
             <LobbyContent />
-        </WebSocketProvider>
     );
 };
 

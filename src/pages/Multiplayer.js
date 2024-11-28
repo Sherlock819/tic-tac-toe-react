@@ -17,7 +17,7 @@ export const Multiplayer = () => {
                 <input 
                     type="text" 
                     placeholder="Enter your friend's Game ID" 
-                    value={gameId} 
+                    value={gameId || ''} 
                     onChange={(e) => setGameId(e.target.value)}
                     className="game-id-input animated-input"
                 />

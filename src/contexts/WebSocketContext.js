@@ -4,6 +4,8 @@ import SockJS from 'sockjs-client';
 import { Client } from '@stomp/stompjs';
 import eventEmitter from '../utilities/EventEmitter';
 import { v4 as uuidv4 } from 'uuid';
+import { fetchUserProfile, updateUserRecord, checkAuthentication } from '../services/userService'; // Import the new service
+import { useDebounce } from 'use-debounce'; // You may need to install this package
 
 export const WebSocketContext = createContext(null);
 
@@ -13,15 +15,15 @@ export const WebSocketProvider = ({ children }) => {
     const [isConnected, setIsConnected] = useState(false);
     const [isReady, setIsReady] = useState(false);
     const [isMyTurn, setIsMyTurn] = useState(false);
-    
+    const [userProfile, setUserProfile] = useState(null);
+    const [loading, setLoading] = useState(false); // Add loading state
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isLoadingProfile, setIsLoadingProfile] = useState(false); // Flag to prevent multiple loads
+    const [message, setMessage] = useState({success:'', error:''});
+    // Debounce the loading of the user profile
+    const [debouncedIsAuthenticated] = useDebounce(isAuthenticated, 100); // Adjust the delay as needed
 
-    useEffect(() => {
-
-        return () => {
-            if(stompClientRef && stompClientRef.current)
-                stompClientRef.current.deactivate(); // Clean up on unmount
-        };
-    }, []);
+    const jwtToken = localStorage.getItem('jwtToken'); // Retrieve the JWT token
 
     const generateUniqueId = () => {
         return uuidv4(); // Generates a unique identifier like 'b8d75ff7-73eb-4b0f-8fbc-d6ec5b7c4c6f'
@@ -95,6 +97,9 @@ export const WebSocketProvider = ({ children }) => {
                 reconnectDelay: 5000,
                 heartbeatIncoming: 4000,
                 heartbeatOutgoing: 4000,
+                connectHeaders: {
+                    Authorization: `Bearer ${jwtToken}` // Include the token in the headers
+                }
             });
         // console.log("Stomp Client Ref ", stompClientRef.current);
 
@@ -121,6 +126,9 @@ export const WebSocketProvider = ({ children }) => {
 
             stompClientRef.current.publish({
                 destination: "/app/create-game", // Endpoint to send the message to
+                headers: {
+                    Authorization: `Bearer ${jwtToken}` // Include the JWT token here
+                },
                 body: id // The payload of the message, empty for creating a game
             });
         };
@@ -137,6 +145,9 @@ export const WebSocketProvider = ({ children }) => {
             reconnectDelay: 5000,
             heartbeatIncoming: 4000,
             heartbeatOutgoing: 4000,
+            connectHeaders: {
+                Authorization: `Bearer ${jwtToken}` // Include the token in the headers
+            }
         });
     
         stompClientRef.current.onConnect = () => {
@@ -145,8 +156,11 @@ export const WebSocketProvider = ({ children }) => {
             // Publish a request to join the game
             console.log('Publishing join-game message for gameId:', gameId);
             stompClientRef.current.publish({
-                destination: "/app/join-game", // Endpoint to send the message to
-                body: gameId // The payload of the message
+                destination: `/app/join-game`, // Ensure this endpoint is correct
+                headers: {
+                    Authorization: `Bearer ${jwtToken}` // Include the JWT token here
+                },
+                body: gameId  // Add any necessary body if required
             });
     
             subscribeToGameTopics(gameId, stompClientRef);
@@ -162,16 +176,116 @@ export const WebSocketProvider = ({ children }) => {
         console.log("Sending move: ", index, player);
 
         if (stompClientRef.current && stompClientRef.current.connected) {
+            const jwtToken = localStorage.getItem('jwtToken'); // Retrieve the token
             const move = JSON.stringify({ position: index, symbol: player, gameId: gameId });
-            console.log("Sending move: ", move);  // Add this log
+            console.log("Sending move: ", move);
             stompClientRef.current.publish({
-                destination: "/app/make-move", // Correct destination for sending moves
+                destination: "/app/make-move",
                 body: move,
+                headers: { Authorization: `Bearer ${jwtToken}` } // Add token to headers
             });
             console.log("Move sent: ", move);
         }
     };
 
+    const loadUserProfile = async () => {
+        console.log("Loading Profile...");
+        setLoading(true);
+        const jwtToken = localStorage.getItem('jwtToken');
+        if (!jwtToken) {
+            console.log("Invalid token");
+            setIsAuthenticated(false);
+            setLoading(false);
+            setIsLoadingProfile(false); // Stop loading
+            return;
+        }
+
+        try {
+            const data = await fetchUserProfile(jwtToken); // Use the service function
+            setUserProfile(data);
+            console.log("Updated user profile:", data);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const updateUserProfile = async (formData) => {
+        console.log("Updating Profile...")
+        setLoading(true); // Start loading
+        const jwtToken = localStorage.getItem('jwtToken');
+        if (!jwtToken) {
+            setIsAuthenticated(false);
+            setLoading(false); // Stop loading
+            return;
+        }
+
+        try {
+            const response = await updateUserRecord(jwtToken, formData); // Use the service function
+            setUserProfile(response);
+            setMessage({success: 'Profile Updated Successfully!!', error: ''});
+        } catch (error) {
+            setMessage({success: '', error: error.message});
+            throw new Error(error || 'Failed to update user profile'); // Use the message from the response
+        } finally {
+            setLoading(false); // Stop loading
+        }
+    };
+
+    const checkAuth = async () => {
+        console.log("Checking Auth...")
+        setLoading(true); // Start loading
+        const jwtToken = localStorage.getItem('jwtToken');
+        if (!jwtToken) {
+            setIsAuthenticated(false);
+            setLoading(false); // Stop loading
+            return;
+        }
+
+        try {
+            await checkAuthentication(jwtToken);
+            setIsAuthenticated(true); // Set authenticated state
+        } catch (error) {
+            console.error(error);
+            setIsAuthenticated(false); // Set not authenticated
+        } finally {
+            setLoading(false); // Stop loading
+        }
+    };
+
+    useEffect(() => {
+        checkAuth(); // Call checkAuth on mount
+    }, []);
+
+    useEffect(() => {
+        
+        return () => {
+            if(stompClientRef && stompClientRef.current)
+                stompClientRef.current.deactivate(); // Clean up on unmount
+        };
+    }, []);
+
+    const logout = () => {
+        localStorage.removeItem('jwtToken'); // Remove the JWT token from local storage
+        setUserProfile(null); // Clear user profile
+        setIsConnected(false); // Update connection state
+        setGameId(null); // Clear game ID
+        setIsReady(false)
+        setIsMyTurn(false)
+        window.location.reload(); // Reload the application
+
+        // ... other logout logic if necessary
+    };
+
+    useEffect(() => {
+        if (debouncedIsAuthenticated && !isLoadingProfile) {
+            setIsLoadingProfile(true); // Set loading state before calling the function
+            loadUserProfile().finally(() => {
+                setIsLoadingProfile(false); // Ensure loading state is reset after the function completes
+            });
+        }
+    }, [debouncedIsAuthenticated]); // Remove isLoadingProfile from dependencies
 
     return (
         <WebSocketContext.Provider value={{stompClientRef,
@@ -183,7 +297,17 @@ export const WebSocketProvider = ({ children }) => {
             isConnected,
             isReady,
             isMyTurn,
-            setIsMyTurn}}>
+            setIsMyTurn,
+            userProfile,
+            loadUserProfile,
+            updateUserProfile,
+            checkAuth,
+            loading,
+            setLoading,
+            isAuthenticated,
+            setIsAuthenticated,
+            logout,
+            message}}>
 
             {children}
         </WebSocketContext.Provider>

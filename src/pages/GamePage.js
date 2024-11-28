@@ -5,7 +5,7 @@ import { WebSocketContext } from '../contexts/WebSocketContext';
 import { useMultiplayerPlayerGameLogic } from '../hooks/useMultiplayerPlayerGameLogic';
 
 const GamePage = () => {
-    const { gameId, isMyTurn, isReady, playerSymbol } = useContext(WebSocketContext);
+    const { gameId, isMyTurn, isReady } = useContext(WebSocketContext);
     const [copyButtonText, setCopyButtonText] = useState('Copy');
     const { winner, currentPlayer } = useMultiplayerPlayerGameLogic();
     const [gameStatus, setGameStatus] = useState('waiting');
