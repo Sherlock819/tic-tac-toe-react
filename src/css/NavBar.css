@@ -78,3 +78,18 @@
     padding: 10px;
   }
 }
+
+.nav-links {
+  transition: opacity 0.5s ease-in-out;
+}
+
+.nav-links .logout-link,
+.nav-links .profile-link {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.nav-links .logout-link.hidden,
+.nav-links .profile-link.hidden {
+  opacity: 0;
+}

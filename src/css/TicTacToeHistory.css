@@ -1,5 +1,5 @@
 .history-container {
-  background-color: #f8f9fa;
+  background-color: rgba(248, 249, 250, 0);
   border-radius: 10px;
   padding: 20px;
   margin-top: 30px;
@@ -7,12 +7,12 @@
 }
 
 .history-container h3 {
-  color: #2c3e50;
+  color: #020406;
   margin-bottom: 15px;
 }
 
 .history-container p {
-  color: #34495e;
+  color: #020406;
   line-height: 1.6;
   margin-bottom: 15px;
 }
@@ -23,7 +23,7 @@
 }
 
 .history-container li {
-  color: #34495e;
+  color: #020406;
   margin-bottom: 10px;
 }
 
@@ -31,23 +31,23 @@
   text-align: center;
   font-size: 2rem;
   margin-bottom: 20px;
-  color: #6c757d;
+  color: #020406;
 }
 
 .timeline-item {
   margin-bottom: 20px;
   padding: 10px;
   border-left: 4px solid #adb5bd;
-  background-color: #f4f4f9;
-  color: #495057;
+  background-color: rgba(244, 244, 249,0.1);
+  color: #020406;
 }
 
 .timeline-item h3 {
   font-size: 1.5rem;
-  color: #495057;
+  color: #020406;
 }
 
 .timeline-item p {
   font-size: 1rem;
-  color: #6c757d;
+  color: #020406;
 }

@@ -123,7 +123,7 @@ h2 {
 }
 
 .create {
-  background-color: #a3be8c;
+  background-color: #99d366;
   animation: bounceIn 0.5s ease-out 0.2s both;
 }
 
@@ -182,7 +182,7 @@ h2 {
 .join-game-button {
   padding: 10px 25px;
   font-size: 1rem;
-  background-color: #81a1c1;
+  background-color: #509dea;
   color: white;
   border: none;
   border-radius: 20px;

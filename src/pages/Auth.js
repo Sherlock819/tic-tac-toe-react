@@ -13,6 +13,7 @@ const Auth = () => {
 
     const requestOtp = async () => {
         try {
+            setError('')
             const response = await fetch('http://localhost:7070/auth/request-otp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -27,6 +28,7 @@ const Auth = () => {
 
     const validateOtp = async () => {
         try {
+            setError('')
             const response = await fetch('http://localhost:7070/auth/validate-otp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },

@@ -42,6 +42,15 @@ body, html {
   width: 100%;
 }
 
+.game-content {
+  background: linear-gradient(135deg, rgba(255, 255, 255,0.4),rgba(255, 255, 255,0.2));
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 20px;
+  border: 1px soled rgba(255, 255, 255,0.38);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.47);
+}
+
 .game-info {
   margin-bottom: 20px;
 }
@@ -111,17 +120,26 @@ body, html {
   display: flex;
   justify-content: center;
   margin-top: 20px;
-  background-color: var(--board-bg);
+  background-color: rgba(25, 65, 66, 0.22);
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+.board-wrapper {
+  background: linear-gradient(135deg, rgba(255, 255, 255,0.4),rgba(255, 255, 255,0.2));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px soled rgba(255, 255, 255,0.38);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.47);
 }
 
 .game-board {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  background-color: var(--board-bg);
+  background-color: rgba(25, 65, 66, 0.22);
   padding: 10px;
   border-radius: 10px;
 }
@@ -129,7 +147,7 @@ body, html {
 .game-tile {
   width: 80px;
   height: 80px;
-  background-color: var(--tile-bg);
+  background-color: rgba(25, 65, 66, 0.22);
   border-radius: 10px;
   display: flex;
   justify-content: center;
@@ -142,7 +160,7 @@ body, html {
 }
 
 .game-tile:hover {
-  background-color: var(--tile-hover-bg);
+  background-color: rgba(25, 65, 66, 0.72);
   transform: translateY(-2px);
   box-shadow: 0 4px 8px var(--shadow-color);
 }

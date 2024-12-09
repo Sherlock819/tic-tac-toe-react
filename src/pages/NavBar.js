@@ -7,13 +7,12 @@ import { FaHome, FaRobot, FaUsers, FaBars, FaUserCircle, FaSignOutAlt } from 're
 export const NavBar = () => {
   const location = useLocation();
   const [isNavExpanded, setIsNavExpanded] = useState(false);
-  const { userProfile } = useContext(WebSocketContext); // Get user profile from context
-
-  const displayName = userProfile?.firstName || (userProfile?.email.split('@')[0]); // Get display name
+  const { userProfile, isAuthenticated } = useContext(WebSocketContext); // Add isAuthenticated
+  const displayName = userProfile?.firstName || (userProfile?.email.split('@')[0]);
 
   const handleLogout = () => {
-    localStorage.removeItem('jwtToken'); // Remove JWT token
-    window.location.reload(); // Refresh the page
+    localStorage.removeItem('jwtToken');
+    window.location.reload();
   };
 
   return (
@@ -32,12 +31,16 @@ export const NavBar = () => {
           isActive || location.pathname.startsWith('/game/') ? "active" : undefined}>
           <FaUsers /> <span>Multiplayer</span>
         </NavLink>
-        <NavLink to="/profile" className={({ isActive }) => isActive ? "active" : undefined} end>
-          <FaUserCircle /> <span>{displayName}</span>
-        </NavLink>
-        <NavLink to="/logout" className="logout-link" onClick={handleLogout}>
-          <FaSignOutAlt /> <span>Logout</span>
-        </NavLink>
+        {isAuthenticated && (
+          <>
+            <NavLink to="/profile" className={({ isActive }) => isActive ? "active" : undefined} end>
+              <FaUserCircle /> <span>{displayName}</span>
+            </NavLink>
+            <NavLink to="/logout" className="logout-link" onClick={handleLogout}>
+              <FaSignOutAlt /> <span>Logout</span>
+            </NavLink>
+          </>
+        )}
       </div>
     </nav>
   );

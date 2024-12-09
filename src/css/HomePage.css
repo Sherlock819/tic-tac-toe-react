@@ -3,27 +3,33 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 80px 20px 20px; /* Increased top padding for the floating navbar */
+  padding: 100px 20px 20px; /* Increased top padding for the floating navbar */
   min-height: calc(100vh - 100px); /* Adjusted for top padding */
   max-width: 1200px;
   margin: 0 auto;
 }
 
+.history-section, .game-mode-button, .homepage-header, .game-modes
+{
+  background: linear-gradient(135deg, rgba(255, 255, 255,0.4),rgba(255, 255, 255,0.2));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px soled rgba(255, 255, 255,0.38);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.47);
+}
+
 .homepage-header {
   text-align: center;
   margin-bottom: 40px;
-}
-
-.title {
-  font-size: 2.5rem;
-  color: #2c3e50;
-  margin-bottom: 20px;
-  animation: fadeInDown 1s ease-out;
+  border-radius: 15px; /* Rounded corners */
+  padding: 20px; /* Padding inside the box */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 .intro-text {
   font-size: 1.2rem;
-  color: #34495e;
+  color: #020406;
   max-width: 600px;
   margin: 0 auto;
   animation: fadeIn 1s ease-out 0.5s both;
@@ -31,15 +37,18 @@
 
 .section-title {
   font-size: 2rem;
-  color: #2c3e50;
+  color: #020406;
   margin-bottom: 20px;
   text-align: center;
   animation: fadeIn 1s ease-out;
 }
 
 .game-modes {
-  width: 100%;
+  width: 60%;
   margin-bottom: 40px;
+  border-radius: 15px; /* Rounded corners */
+  padding: 20px; /* Padding inside the box */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 .button-container {
@@ -55,10 +64,9 @@
   align-items: center;
   padding: 20px;
   width: 250px;
-  background-color: #ffffff;
   border-radius: 10px;
   text-decoration: none;
-  color: #2c3e50;
+  color: #020406;
   transition: all 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   animation: fadeIn 1s ease-out 1s both;
@@ -66,6 +74,7 @@
 
 .game-mode-button:hover {
   transform: translateY(-5px);
+  background-color: rgba(245, 239, 239, 0.76);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
@@ -78,17 +87,23 @@
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 10px;
+  color: #020406;
 }
 
 .mode-description {
   font-size: 0.9rem;
   text-align: center;
-  color: #7f8c8d;
+  color: #020406;
 }
 
 .history-section {
   width: 100%;
   animation: fadeIn 1s ease-out 1.5s both;
+  background-color: rgba(44, 35, 35, 0.22); /* Translucent white background */
+  border-radius: 15px; /* Rounded corners */
+  padding: 20px; /* Padding inside the box */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  margin-bottom: 20px; /* Space between sections */
 }
 
 @keyframes fadeInDown {

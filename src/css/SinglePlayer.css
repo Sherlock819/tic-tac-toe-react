@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 80px 20px 20px; /* Increased top padding for the floating navbar */
+  padding: 100px 20px 20px; /* Increased top padding for the floating navbar */
   min-height: calc(100vh - 100px); /* Adjusted for top padding */
   box-sizing: border-box;
 }
@@ -11,9 +11,19 @@
 .instructions {
   margin-bottom: 30px;
   text-align: center;
-  color: #4c566a;
+  color: #10203e;
   font-size: 1.1rem;
   max-width: 600px;
+  width: 100%;
+}
+
+.instructions {
+  background: linear-gradient(135deg, rgba(255, 255, 255,0.4),rgba(255, 255, 255,0.2));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px soled rgba(255, 255, 255,0.38);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.47);
 }
 
 .animated-text {
@@ -21,7 +31,7 @@
 }
 
 .highlight {
-  color: #5e81ac;
+  color: #274263;
   font-weight: bold;
   animation: pulse 2s infinite;
 }
